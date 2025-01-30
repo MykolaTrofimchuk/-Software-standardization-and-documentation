@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="476e006c-1597-466a-a042-f9c2ea25e4cf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/CMS_autoSalesService.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Controllers/AnnouncementsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Controllers/ErrorController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Controllers/SiteController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Controllers/UsersController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Models/Announcements.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Models/Users.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/announcements/add.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/announcements/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/announcements/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/error/error.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/layouts/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/layouts/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/site/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/edit.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/editpassword.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/editphoto.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/me.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/register.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/registersuccess.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/config/config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/config/database.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Controller.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Core.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/DB.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Get.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Model.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Post.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/RequestMethod.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Router.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Session.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Template.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/database/users/user20/10lvl.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/database/users/user20/OIP.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/database/users/user20/among-us.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/database/users/user20/golf_tuned.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/resourses/facebook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/resourses/instagram.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/resourses/twitter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="PhpWebServerValidation" path_to_validation_script="C:\wamp64\www\2 course Coursework\CMS_autoSalesService" selected_validation_type="LOCAL" web_path_to_validation_script="http://cms/" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2fjeMExijUUE1dpRN99GA8nSo6Q" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/wamp64/www/3course Practica/CMS_ITLabPortal&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.webide.settings.project.settings.php.debug&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\2 course Coursework\CMS_autoSalesService\src" />
+      <recent name="C:\wamp64\www\2 course Coursework\CMS_autoSalesService\Views\layouts" />
+      <recent name="C:\wamp64\www\2 course Coursework\CMS_autoSalesService\Views\layouts\styles" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-PS-243.23654.168" />
+        <option value="bundled-php-predefined-a98d8de5180a-4c3855d0ab16-com.jetbrains.php.sharedIndexes-PS-243.23654.168" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="476e006c-1597-466a-a042-f9c2ea25e4cf" name="Changes" comment="" />
+      <created>1714318864997</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714318864997</updated>
+      <workItem from="1714318866253" duration="48000" />
+      <workItem from="1714320651826" duration="3543000" />
+      <workItem from="1715270040286" duration="4881000" />
+      <workItem from="1715889073009" duration="49000" />
+      <workItem from="1716816468006" duration="4878000" />
+      <workItem from="1717005643063" duration="4409000" />
+      <workItem from="1717067911226" duration="15131000" />
+      <workItem from="1717167074267" duration="9464000" />
+      <workItem from="1717182948273" duration="6681000" />
+      <workItem from="1717319109218" duration="19577000" />
+      <workItem from="1738177104732" duration="93000" />
+      <workItem from="1738177274584" duration="5633000" />
+      <workItem from="1738245406532" duration="7519000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

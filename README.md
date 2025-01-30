@@ -1,2 +1,2 @@
 # CMS
- Coursework Auto Sales Site || by Trofimchuk Mykola IPZ-22-2 \ 2 course student 
+ ITLab Studio News Site || by Trofimchuk Mykola IPZ-22-2 \ 3 course student 
