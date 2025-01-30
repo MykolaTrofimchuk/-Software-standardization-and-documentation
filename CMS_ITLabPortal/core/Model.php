@@ -20,7 +20,7 @@ class Model
 
     public function __get($name)
     {
-        return $this->fieldsArray[$name];
+        return $this->fieldsArray[$name] ?? null;
     }
 
     public function save()
@@ -36,6 +36,7 @@ class Model
         $value = $this->{static::$primaryKey};
         if (empty($value)) // insert
         {
+            var_dump($this->fieldsArray);
             Core::get()->db->insert(static::$tableName, $this->fieldsArray);
         } else // update
         {

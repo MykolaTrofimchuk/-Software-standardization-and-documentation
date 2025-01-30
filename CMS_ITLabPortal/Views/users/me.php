@@ -4,7 +4,7 @@
 $this->Title = 'Профіль користувача';
 
 $userInfo = \Models\Users::GetUserInfo(\core\Core::get()->session->get('user')['id']);
-$userImage = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : 'https://cdn-icons-png.flaticon.com/512/4837/4837857.png';
+$userImage = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : '../../../src/resourses/user-default.png';
 ?>
 <!doctype html>
 <html lang="en">

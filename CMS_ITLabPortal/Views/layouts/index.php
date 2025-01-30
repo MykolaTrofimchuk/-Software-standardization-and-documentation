@@ -13,7 +13,7 @@ if (!empty($user) && isset($user['id'])) {
 } else {
     $userInfo = null;
 }
-$userPhoto = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : 'https://cdn-icons-png.flaticon.com/512/4837/4837857.png';
+$userPhoto = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : '../../../src/resourses/user-default.png';
 ?>
 
 <!doctype html>
@@ -45,7 +45,7 @@ $userPhoto = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : 'h
                 <li><a href="/announcements/view/1" class="nav-link px-2 link-secondary">Новини</a></li>
             </ul>
             <?php if (\Models\Users::IsUserLogged() && \Models\Users::IsAdmin($user['id'])): ?>
-                <a href="#" class="btn btn-outline-secondary me-2">&#9658;Створити оголошення</a></li>
+                <a href="/announcements/add" class="btn btn-outline-secondary me-2">&#9658;Створити оголошення</a></li>
             <?php endif; ?>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">

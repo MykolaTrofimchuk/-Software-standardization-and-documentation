@@ -5,54 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="476e006c-1597-466a-a042-f9c2ea25e4cf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/CMS_autoSalesService.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Controllers/AnnouncementsController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Controllers/ErrorController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Controllers/SiteController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Controllers/UsersController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Models/Announcements.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Models/Users.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/announcements/add.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/announcements/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/announcements/view.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/error/error.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/layouts/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/layouts/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/site/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/editpassword.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/editphoto.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/login.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/me.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/register.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/Views/users/registersuccess.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/config/config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/config/database.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Controller.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Core.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/DB.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Get.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Model.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Post.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/RequestMethod.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Router.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Session.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/core/Template.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/database/users/user20/10lvl.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/database/users/user20/OIP.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/database/users/user20/among-us.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/database/users/user20/golf_tuned.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/resourses/facebook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/resourses/instagram.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMS_autoSalesService/src/resourses/twitter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/AnnouncementsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AnnouncementsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Announcements.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Announcements.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/announcements/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/announcements/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/announcements/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/announcements/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/announcements/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/announcements/view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/layouts/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/layouts/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/users/me.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/users/me.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/Model.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +94,7 @@
       <workItem from="1717319109218" duration="19577000" />
       <workItem from="1738177104732" duration="93000" />
       <workItem from="1738177274584" duration="5633000" />
-      <workItem from="1738245406532" duration="7519000" />
+      <workItem from="1738245406532" duration="14769000" />
     </task>
     <servers />
   </component>

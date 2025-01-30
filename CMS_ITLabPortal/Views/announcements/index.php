@@ -60,11 +60,11 @@ $announcement = $GLOBALS['announcement'];
             </div>
             <div class="col-md-6" style="margin-top: -250px;">
                 <?php if (isset($announcement)): ?>
-                    <div class="small mb-1"><?= htmlspecialchars($announcement->publicationDate) ?></div>
+                    <div class="small mb-1"><?= htmlspecialchars($announcement->publicationDate) ?><?= htmlspecialchars($announcement->id) ?></div>
                     <h1 class="display-5 fw-bolder"><?= htmlspecialchars($announcement->title) ?></h1>
                     <div class="d-flex flex-wrap fs-5 mb-5">
                     </div>
-                    <p class="lead"><?= htmlspecialchars($announcement->text) ?></p>
+                    <p class="lead"><?= $announcement->text ?></p>
                 <?php endif; ?>
                 <div class="d-flex">
                     <button class="btn btn-outline-dark flex-shrink-0" type="button">

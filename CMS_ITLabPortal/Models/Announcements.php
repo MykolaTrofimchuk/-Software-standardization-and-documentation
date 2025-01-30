@@ -7,10 +7,10 @@ use core\Model;
 use DateTime;
 
 /**
+ * @property int $id ID оголошення
  * @property string $title Заголовок оголошення
  * @property string $text Текст оголошення
  * @property string $date Дата оголошення
- * @property int $id ID оголошення
 */
 class Announcements extends Model
 {
@@ -40,6 +40,24 @@ class Announcements extends Model
     public static function CountAll()
     {
         return self::findRowsByCondition('COUNT(*) as count');
+    }
+
+    public static function AddAnnouncement($title, $text, $publicationDate)
+    {
+        $announcement = new Announcements();
+        $announcement->title = $title;
+        $announcement->text= $text;
+        $announcement->publicationDate = $publicationDate;
+        $announcement->save();
+    }
+
+    public static function lastInsertedId()
+    {
+        $result = self::findRowsByCondition("LAST_INSERT_ID() as last_id");
+        if (!empty($result)) {
+            return $result[0]['last_id'];
+        }
+        return null;
     }
 
 }
