@@ -82,19 +82,19 @@ $announcements = \Models\Announcements::SelectAll();
                     <div class="col-md-12">
                         <?php foreach ($GLOBALS['announcements'] as $announcement): ?>
                             <?php
-                            // Default image path
                             $imageSrc = "../../../../src/resourses/no-photo.jpg";
                             $imagesPath = "./" . $announcement['pathToImages'];
 
-                            // Use realpath to debug the path issue
                             $realImagesPath = realpath($imagesPath);
                             $realImagesPath = str_replace('\\', '/', $realImagesPath);
 
                             if (!is_null($announcement['pathToImages']) && is_dir($realImagesPath)) {
-                                $images = scandir($realImagesPath);
-                                $images = array_diff($images, array('.', '..'));
-                                $firstImage = !empty($images) ? reset($images) : null;
-                                $imageSrc = "../../../../../". $announcement['pathToImages'] . "/" . $firstImage;
+                                $images = array_values(array_diff(scandir($realImagesPath), ['.', '..']));
+
+                                if (!empty($images)) {
+                                    $firstImage = reset($images);
+                                    $imageSrc = "../../../../../" . $announcement['pathToImages'] . "/" . $firstImage;
+                                }
                             }
                             ?>
                             <div class="card mb-4">

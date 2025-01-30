@@ -41,7 +41,13 @@ class AnnouncementsController extends Controller
                     foreach ($_FILES['files']['tmp_name'] as $index => $tmpName) {
                         if ($_FILES['files']['error'][$index] === UPLOAD_ERR_OK) {
                             $uploadFile = $uploadDir . basename($_FILES['files']['name'][$index]);
-                            move_uploaded_file($tmpName, $uploadFile);
+
+                            $check = getimagesize($tmpName);
+                            if ($check !== false) {
+                                move_uploaded_file($tmpName, $uploadFile);
+                            } else {
+                                $this->addErrorMessage('Файл ' . $_FILES['carImages']['name'][$index] . ' не є зображенням.');
+                            }
                         } else {
                             $this->addErrorMessage('Не вдалося завантажити файл: ' . $_FILES['files']['name'][$index]);
                         }
@@ -70,14 +76,16 @@ class AnnouncementsController extends Controller
         $queryParts = explode('/', $routeParams);
         $id = end($queryParts);
 
-        // Перевіряємо, чи є в запиті параметр 'id'
         if ($id !== null) {
             $announcementId = $id;
             $announcement = Announcements::SelectById($announcementId);
+            $announcementImages = Files::FindPathByAnnouncementId($announcementId);
+
             if (!$announcement) {
                 return $this->render("Views/site/index.php");
             }
             $GLOBALS['announcement'] = $announcement;
+            $GLOBALS['images'] = $announcementImages;
 
             return $this->render();
         }

@@ -2,6 +2,7 @@
 $this->Title = '';
 
 $announcement = $GLOBALS['announcement'];
+$pathToImages = $GLOBALS['images'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -11,6 +12,7 @@ $announcement = $GLOBALS['announcement'];
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="lightbox.js"></script>
     <style>
         .big-photo {
             width: 100%;
@@ -22,7 +24,7 @@ $announcement = $GLOBALS['announcement'];
             overflow-y: auto;
         }
 
-        .small-photos .col-md-4 {
+        .small-photos {
             flex: 0 0 calc(33.33% - 10px);
             margin-bottom: 10px;
         }
@@ -34,36 +36,49 @@ $announcement = $GLOBALS['announcement'];
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
                 <div class="row">
+                    <?php
+                    // Default image path
+                    $imageSrc = "../../../../src/resourses/no-photo.jpg";
+                    $imagesPath = "./" . $pathToImages;
+
+                    // Use realpath to debug the path issue
+                    $realImagesPath = realpath($imagesPath);
+                    $realImagesPath = str_replace('\\', '/', $realImagesPath);
+
+                    if (!is_null($pathToImages) && is_dir($realImagesPath)) {
+                        $images = scandir($realImagesPath);
+                        $images = array_diff($images, array('.', '..'));
+                        $firstImage = !empty($images) ? reset($images) : null;
+                        $firstImageSrc = "../../../../../" . $pathToImages . "/" . $firstImage;
+                        array_shift($images);
+                    }else{
+                        $images = ['../../../src/resourses/no-photo.jpg'];
+                        $firstImageSrc = '../../../src/resourses/no-photo.jpg';
+                    }
+                    ?>
                     <div class="col-12 mb-3">
-                        <img class="card-img-top big-photo" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="...">
+                        <img class="card-img-top big-photo" src="<?php echo($firstImageSrc) ?>" alt="...">
                     </div>
                     <div class="col-12">
                         <div class="row small-photos">
-                            <div class="col-md-3 mb-2">
-                                <img class="card-img-top" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="...">
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <img class="card-img-top" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="...">
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <img class="card-img-top" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="...">
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <img class="card-img-top" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="...">
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <img class="card-img-top" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="...">
-                            </div>
+                            <?php foreach ($images as $image): ?>
+                                <div class="col-md-3 mb-2">
+                                    <a href="<?php echo "../../../../../" . $pathToImages . "/" . $image ?>"
+                                       data-lightbox="gallery">
+                                        <img class="card-img-top"
+                                             src="<?php echo "../../../../../" . $pathToImages . "/" . $image ?>"
+                                             alt="...">
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" style="margin-top: -250px;">
+            <div class="col-md-6" style="margin-top: -50px;">
                 <?php if (isset($announcement)): ?>
-                    <div class="small mb-1"><?= htmlspecialchars($announcement->publicationDate) ?><?= htmlspecialchars($announcement->id) ?></div>
+                    <div class="small mb-1"><?= htmlspecialchars($announcement->publicationDate) ?> <?= htmlspecialchars($announcement->id) ?></div>
                     <h1 class="display-5 fw-bolder"><?= htmlspecialchars($announcement->title) ?></h1>
-                    <div class="d-flex flex-wrap fs-5 mb-5">
-                    </div>
                     <p class="lead"><?= $announcement->text ?></p>
                 <?php endif; ?>
                 <div class="d-flex">
