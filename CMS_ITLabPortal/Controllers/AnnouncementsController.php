@@ -5,6 +5,7 @@ namespace Controllers;
 use core\Controller;
 use Models\Announcements;
 use Models\Files;
+use Models\UserLikeAnnouncements;
 use Models\Users;
 
 class AnnouncementsController extends Controller
@@ -80,12 +81,14 @@ class AnnouncementsController extends Controller
             $announcementId = $id;
             $announcement = Announcements::SelectById($announcementId);
             $announcementImages = Files::FindPathByAnnouncementId($announcementId);
+            $countFavorites = UserLikeAnnouncements::CountByAnnouncementId($announcementId);
 
             if (!$announcement) {
                 return $this->render("Views/site/index.php");
             }
             $GLOBALS['announcement'] = $announcement;
             $GLOBALS['images'] = $announcementImages;
+            $GLOBALS['countLikes'] = $countFavorites;
 
             return $this->render();
         }
@@ -120,6 +123,7 @@ class AnnouncementsController extends Controller
 
             foreach ($announcements as &$announcement) {
                 $announcement['pathToImages'] = Files::FindPathByAnnouncementId($announcement['id']);
+                $announcement['countLikes'] = UserLikeAnnouncements::CountByAnnouncementId($announcement['id']);
             }
 
             $GLOBALS['announcements'] = $announcements;
@@ -136,5 +140,52 @@ class AnnouncementsController extends Controller
             $this->redirect('/');
         }
         return $this->render();
+    }
+
+    public function actionAddtofavorites()
+    {
+        if (!\Models\Users::IsUserLogged()) {
+            $this->redirect('/');
+        }
+        $routeParams = $this->get->route;
+        $queryParts = explode('/', $routeParams);
+        $id = end($queryParts);
+        if ($id !== null) {
+            $announcementId = $id;
+            $userId = \core\Core::get()->session->get('user')['id'];
+            $existingFavorite = \Models\UserLikeAnnouncements::findByCondition(['user_id' => $userId, 'announcement_id' => $announcementId]);
+            if ($existingFavorite) {
+                $successMessage = "Це оголошення вже вподобано!";
+            } else {
+                \Models\UserLikeAnnouncements::AddRow($userId,  $announcementId);
+                $successMessage = "Оголошення успішно вподобано!";
+            }
+            $GLOBALS['successMessage'] = isset($successMessage) ? $successMessage : null;
+            $referer = $_SERVER['HTTP_REFERER'] ?? '/announcements';
+            $this->redirect($referer);
+        }
+    }
+    public function actionRemovefromfavorites()
+    {
+        if (!\Models\Users::IsUserLogged()) {
+            $this->redirect('/');
+        }
+        $routeParams = $this->get->route;
+        $queryParts = explode('/', $routeParams);
+        $id = end($queryParts);
+        if ($id !== null) {
+            $announcementId = $id;
+            $userId = \core\Core::get()->session->get('user')['id'];
+            $existingFavorite = \Models\UserLikeAnnouncements::findByCondition(['user_id' => $userId, 'announcement_id' => $announcementId]);
+            if ($existingFavorite) {
+                \Models\UserLikeAnnouncements::RemoveRow($userId,  $announcementId);
+                $successMessage = "Відмітку успішно прибрано!";
+            } else {
+                $successMessage = "Оголошення не відмічене!";
+            }
+            $GLOBALS['successMessage'] = isset($successMessage) ? $successMessage : null;
+            $referer = $_SERVER['HTTP_REFERER'] ?? '/announcements';
+            $this->redirect($referer);
+        }
     }
 }

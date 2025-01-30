@@ -15,6 +15,7 @@ $announcements = \Models\Announcements::SelectAll();
             justify-content: center;
             margin-top: 20px;
         }
+
         .pagination a {
             color: #007bff;
             text-decoration: none;
@@ -23,11 +24,13 @@ $announcements = \Models\Announcements::SelectAll();
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         .pagination a.active {
             background-color: #007bff;
             color: white;
             border: 1px solid #007bff;
         }
+
         .pagination a:hover:not(.active) {
             background-color: #ddd;
         }
@@ -53,18 +56,18 @@ $announcements = \Models\Announcements::SelectAll();
 
             <hr>
 
-<!--            <h5>Рубрики</h5>-->
-<!--            <ul class="list-group">-->
-<!--                <li class="list-group-item"><a href="#">Анонси (505)</a></li>-->
-<!--                <li class="list-group-item"><a href="#">Навчання (1614)</a></li>-->
-<!--                <li class="list-group-item"><a href="#">Наукова діяльність (1095)</a></li>-->
-<!--                <li class="list-group-item"><a href="#">Новини (1551)</a></li>-->
-<!--                <li class="list-group-item"><a href="#">Оголошення (1156)</a></li>-->
-<!--                <li class="list-group-item"><a href="#">Події (1893)</a></li>-->
-<!--                <li class="list-group-item"><a href="#">Різне (2331)</a></li>-->
-<!--            </ul>-->
-<!---->
-<!--            <hr>-->
+            <!--            <h5>Рубрики</h5>-->
+            <!--            <ul class="list-group">-->
+            <!--                <li class="list-group-item"><a href="#">Анонси (505)</a></li>-->
+            <!--                <li class="list-group-item"><a href="#">Навчання (1614)</a></li>-->
+            <!--                <li class="list-group-item"><a href="#">Наукова діяльність (1095)</a></li>-->
+            <!--                <li class="list-group-item"><a href="#">Новини (1551)</a></li>-->
+            <!--                <li class="list-group-item"><a href="#">Оголошення (1156)</a></li>-->
+            <!--                <li class="list-group-item"><a href="#">Події (1893)</a></li>-->
+            <!--                <li class="list-group-item"><a href="#">Різне (2331)</a></li>-->
+            <!--            </ul>-->
+            <!---->
+            <!--            <hr>-->
 
             <h5>Архів</h5>
             <select class="form-select">
@@ -98,12 +101,22 @@ $announcements = \Models\Announcements::SelectAll();
                             }
                             ?>
                             <div class="card mb-4">
-                                <img class="card-img-top" alt="<?php echo($imageSrc) ?>" style="height: 225px; width: 100%; display: block;" src="<?php echo($imageSrc) ?>" data-holder-rendered="true">
+                                <img class="card-img-top" alt="<?php echo($imageSrc) ?>"
+                                     style="height: 225px; width: 100%; display: block;"
+                                     src="<?php echo($imageSrc) ?>" data-holder-rendered="true">
+
                                 <div class="card-body">
                                     <h5 class="card-title"><?= htmlspecialchars($announcement['title']) ?></h5>
                                     <p class="card-text"><?= htmlspecialchars($announcement['text']) ?></p>
-                                    <a href="/announcements/index/<?= $announcement['id'] ?>" class="btn btn-sm btn-outline-primary">Переглянути</a>
-                                    <small class="text-muted d-block mt-2"><?= htmlspecialchars($announcement['publicationDate']) ?></small>
+                                    <a href="/announcements/index/<?= $announcement['id'] ?>"
+                                       class="btn btn-sm btn-outline-primary">Переглянути</a>
+
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <small class="text-muted"><?= htmlspecialchars($announcement['publicationDate']) ?></small>
+                                        <div class="fw-bolder text-danger">
+                                            &#9829; <?= htmlspecialchars($announcement['countLikes'][0]['count']) ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
