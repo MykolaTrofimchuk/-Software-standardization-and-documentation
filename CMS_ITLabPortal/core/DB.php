@@ -18,21 +18,26 @@ class DB
 
     protected function where($where)
     {
-        if (is_array($where)){
+        if (is_array($where)) {
             $where_string = "WHERE ";
             $where_fields = array_keys($where);
             $parts = [];
-            foreach ($where_fields as $field){
-                $parts[] = "{$field} = :{$field}";
-
+            foreach ($where_fields as $field) {
+                if (strpos($field, ':') !== false) {
+                    $parts[] = $field;
+                } else {
+                    $split = explode(' ', $field, 2);
+                    $field = $split[0];
+                    $operator = isset($split[1]) ? $split[1] : '=';
+                    $parts[] = "{$field} {$operator} :{$field}_unique";
+                }
             }
             $where_string .= implode(' AND ', $parts);
-        } else
-            if (is_string($where))
-                $where_string = $where;
-            else
-                $where_string = '';
-
+        } elseif (is_string($where)) {
+            $where_string = "WHERE {$where}";
+        } else {
+            $where_string = '';
+        }
         return $where_string;
     }
 
@@ -46,23 +51,30 @@ class DB
             $fields_string = "*";
         }
 
-        $where_string = $this->where($where);
-
-        $limit_string = '';
-        if ($limit !== null) {
-            $limit_string = "LIMIT {$limit}";
+        $where_string = '';
+        if ($where !== null) {
+            $where_string = $this->where($where);
         }
 
-        $offset_string = '';
-        if ($offset !== null && $offset > 0) {
-            $offset_string = "OFFSET {$offset}";
-        }
+        $limit_string = $limit !== null ? "LIMIT {$limit}" : '';
+        $offset_string = $offset !== null && $offset > 0 ? "OFFSET {$offset}" : '';
 
         $sql = "SELECT {$fields_string} FROM {$table} {$where_string} {$limit_string} {$offset_string}";
+
         $sth = $this->pdo->prepare($sql);
+
         if ($where !== null) {
             foreach ($where as $key => $value) {
-                $sth->bindValue(":{$key}", $value);
+                if (strpos($key, ':') !== false) {
+                    $sth->bindValue($key, $value);
+                } else {
+                    $field = explode(' ', $key)[0];
+                    if ($value === null) { // Якщо значення null, тоді прив'яжемо параметр без значення
+                        $sth->bindValue(":{$field}_unique", NULL, );
+                    } else {
+                        $sth->bindValue(":{$field}_unique", $value);
+                    }
+                }
             }
         }
         $sth->execute();
@@ -92,8 +104,12 @@ class DB
 
         $sql = "DELETE FROM {$table} {$where_string}";
         $sth = $this->pdo->prepare($sql);
-        foreach ($where as $key => $value)
-            $sth->bindValue(":{$key}", $value);
+        foreach ($where as $key => $value) {
+            if (is_array($value)) {
+                $value = $value[0];
+            }
+            $sth->bindValue(":{$key}_unique", $value);
+        }
         $sth->execute();
         return $sth->rowCount();
     }

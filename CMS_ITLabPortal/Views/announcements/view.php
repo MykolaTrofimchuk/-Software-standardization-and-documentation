@@ -1,5 +1,4 @@
 <?php
-$this->Title = 'Список оголошень';
 $announcements = \Models\Announcements::SelectAll();
 ?>
 <!doctype html>
@@ -10,6 +9,12 @@ $announcements = \Models\Announcements::SelectAll();
     <title><?= $this->Title ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .card {
+            cursor: pointer;
+        }
+        .card:hover {
+            background-color: #f8f9fa;
+        }
         .pagination {
             display: flex;
             justify-content: center;
@@ -41,33 +46,24 @@ $announcements = \Models\Announcements::SelectAll();
     <div class="row">
         <!-- Бокова панель -->
         <aside class="col-md-3">
-            <form method="GET" action="/announcements/filter">
-                <div class="mb-3">
-                    <label for="period" class="form-label">Оберіть період:</label>
-                    <select class="form-select" name="period" id="period">
-                        <option value="day">Останній день</option>
-                        <option value="week">Останній тиждень</option>
-                        <option value="month">Останній місяць</option>
-                        <option value="year">Останній рік</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary btn-sm w-100">Застосувати</button>
+            <form method="GET" action="/announcements/view" class="mb-3">
+                <label for="start_date" class="form-label">Початкова дата:</label>
+                <input type="date" class="form-control" name="start_date" id="start_date" value="<?= $_GET['start_date'] ?? '' ?>">
+
+                <label for="end_date" class="form-label">Кінцева дата:</label>
+                <input type="date" class="form-control" name="end_date" id="end_date" value="<?= $_GET['end_date'] ?? '' ?>">
+
+                <label for="sort" class="form-label">Сортувати за:</label>
+                <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
+                    <option value="date_desc" <?= ($GLOBALS['sort'] === 'date_desc') ? 'selected' : '' ?>>Найновіші</option>
+                    <option value="date_asc" <?= ($GLOBALS['sort'] === 'date_asc') ? 'selected' : '' ?>>Найстаріші</option>
+                    <option value="likes_desc" <?= ($GLOBALS['sort'] === 'likes_desc') ? 'selected' : '' ?>>Найпопулярніші</option>
+                    <option value="likes_asc" <?= ($GLOBALS['sort'] === 'likes_asc') ? 'selected' : '' ?>>Найменш популярні</option>
+                </select>
             </form>
 
             <hr>
 
-            <!--            <h5>Рубрики</h5>-->
-            <!--            <ul class="list-group">-->
-            <!--                <li class="list-group-item"><a href="#">Анонси (505)</a></li>-->
-            <!--                <li class="list-group-item"><a href="#">Навчання (1614)</a></li>-->
-            <!--                <li class="list-group-item"><a href="#">Наукова діяльність (1095)</a></li>-->
-            <!--                <li class="list-group-item"><a href="#">Новини (1551)</a></li>-->
-            <!--                <li class="list-group-item"><a href="#">Оголошення (1156)</a></li>-->
-            <!--                <li class="list-group-item"><a href="#">Події (1893)</a></li>-->
-            <!--                <li class="list-group-item"><a href="#">Різне (2331)</a></li>-->
-            <!--            </ul>-->
-            <!---->
-            <!--            <hr>-->
 
             <h5>Архів</h5>
             <select class="form-select">
@@ -100,17 +96,13 @@ $announcements = \Models\Announcements::SelectAll();
                                 }
                             }
                             ?>
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="<?php echo($imageSrc) ?>"
+                            <div class="card mb-4" onclick="window.location.href='/announcements/index/<?= $announcement['id'] ?>'">
+                                <img class="card-img-top" alt="Зображення оголошення"
                                      style="height: 225px; width: 100%; display: block;"
-                                     src="<?php echo($imageSrc) ?>" data-holder-rendered="true">
-
+                                     src="<?= htmlspecialchars($imageSrc) ?>" data-holder-rendered="true">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= htmlspecialchars($announcement['title']) ?></h5>
                                     <p class="card-text"><?= htmlspecialchars($announcement['text']) ?></p>
-                                    <a href="/announcements/index/<?= $announcement['id'] ?>"
-                                       class="btn btn-sm btn-outline-primary">Переглянути</a>
-
                                     <div class="d-flex justify-content-between align-items-center mt-2">
                                         <small class="text-muted"><?= htmlspecialchars($announcement['publicationDate']) ?></small>
                                         <div class="fw-bolder text-danger">

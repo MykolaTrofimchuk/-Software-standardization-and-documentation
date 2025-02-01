@@ -15,6 +15,10 @@ class AnnouncementsController extends Controller
         if ($this->isPost) {
             $userId = \core\Core::get()->session->get('user')['id'];
 
+            if (!Users::IsAdmin($userId)) {
+                $this->redirect('/');
+            }
+
             if (strlen($this->post->title) === 0) {
                 $this->addErrorMessage('Заголовок не вказаний!');
             }
@@ -41,13 +45,12 @@ class AnnouncementsController extends Controller
 
                     foreach ($_FILES['files']['tmp_name'] as $index => $tmpName) {
                         if ($_FILES['files']['error'][$index] === UPLOAD_ERR_OK) {
-                            $uploadFile = $uploadDir . basename($_FILES['files']['name'][$index]);
+                            $uploadFile = $uploadDir . $index . '.' . pathinfo($_FILES['files']['name'][$index], PATHINFO_EXTENSION);
 
-                            $check = getimagesize($tmpName);
-                            if ($check !== false) {
+                            if (exif_imagetype($tmpName) !== false) {
                                 move_uploaded_file($tmpName, $uploadFile);
                             } else {
-                                $this->addErrorMessage('Файл ' . $_FILES['carImages']['name'][$index] . ' не є зображенням.');
+                                $this->addErrorMessage('Файл ' . $_FILES['files']['name'][$index] . ' не є зображенням.');
                             }
                         } else {
                             $this->addErrorMessage('Не вдалося завантажити файл: ' . $_FILES['files']['name'][$index]);
@@ -57,7 +60,6 @@ class AnnouncementsController extends Controller
                     Files::AddImages($announcementId, $uploadDir);
                 }
 
-                // Переадресація на сторінку успіху або виконання інших необхідних дій
                 $this->redirect('/announcements/addsuccess');
             }
         } else {
@@ -109,29 +111,47 @@ class AnnouncementsController extends Controller
             $this->redirect("1");
         }
 
-        if ($currentPage !== null) {
-            $announcementsPerPage = 5;
-            $totalAnnouncements = Announcements::CountAll(); // Get the total number of announcements
-            $totalAnnouncementsCount = isset($totalAnnouncements[0]['count']) ? (int)$totalAnnouncements[0]['count'] : 0;
+        $filterAssocArray = [];
 
-            $totalPages = ceil($totalAnnouncementsCount / $announcementsPerPage);
-            if ($currentPage > $totalPages) {
-                $this->redirect("$totalPages");
+        // Перевірка, чи є збережені параметри фільтрації в сесії
+        if (!empty(\core\Core::get()->session->get('redirect_params'))) {
+            $filter = \core\Core::get()->session->get('redirect_params');
+            $filterArray = $filter['additionalData'];
+
+            foreach ($filterArray as $key => $value) {
+                if (strlen($value) !== 0) {
+                    if (strpos($key, 'Like') !== false) {
+                        $newKey = str_replace('Like', '', $key);
+                        $filterAssocArray["$newKey LIKE"] = "%$value%";
+                    } else {
+                        $filterAssocArray[$key] = $value;
+                    }
+                }
             }
-            $offset = ($currentPage - 1) * $announcementsPerPage;
-            $announcements = Announcements::SelectPaginated($announcementsPerPage, $offset);
-
-            foreach ($announcements as &$announcement) {
-                $announcement['pathToImages'] = Files::FindPathByAnnouncementId($announcement['id']);
-                $announcement['countLikes'] = UserLikeAnnouncements::CountByAnnouncementId($announcement['id']);
-            }
-
-            $GLOBALS['announcements'] = $announcements;
-            $GLOBALS['currentPage'] = $currentPage;
-            $GLOBALS['totalPages'] = $totalPages;
-            return $this->render();
         }
-        return $this->render('Views/announcements/view.php');
+
+        $announcementsPerPage = 5;
+        $totalAnnouncements = Announcements::CountAll($filterAssocArray);
+        $totalAnnouncementsCount = isset($totalAnnouncements[0]['count']) ? (int)$totalAnnouncements[0]['count'] : 0;
+
+        $totalPages = ceil($totalAnnouncementsCount / $announcementsPerPage);
+        if ($currentPage > $totalPages) {
+            $this->redirect("$totalPages");
+        }
+
+        $offset = ($currentPage - 1) * $announcementsPerPage;
+        $announcements = Announcements::SelectPaginated($announcementsPerPage, $offset, $filterAssocArray);
+
+        foreach ($announcements as &$announcement) {
+            $announcement['pathToImages'] = Files::FindPathByAnnouncementId($announcement['id']);
+            $announcement['countLikes'] = UserLikeAnnouncements::CountByAnnouncementId($announcement['id']);
+        }
+
+        $GLOBALS['announcements'] = $announcements;
+        $GLOBALS['currentPage'] = $currentPage;
+        $GLOBALS['totalPages'] = $totalPages;
+
+        return $this->render();
     }
 
     public function actionAddsuccess()
@@ -157,7 +177,7 @@ class AnnouncementsController extends Controller
             if ($existingFavorite) {
                 $successMessage = "Це оголошення вже вподобано!";
             } else {
-                \Models\UserLikeAnnouncements::AddRow($userId,  $announcementId);
+                \Models\UserLikeAnnouncements::AddRow($userId, $announcementId);
                 $successMessage = "Оголошення успішно вподобано!";
             }
             $GLOBALS['successMessage'] = isset($successMessage) ? $successMessage : null;
@@ -165,6 +185,7 @@ class AnnouncementsController extends Controller
             $this->redirect($referer);
         }
     }
+
     public function actionRemovefromfavorites()
     {
         if (!\Models\Users::IsUserLogged()) {
@@ -178,7 +199,7 @@ class AnnouncementsController extends Controller
             $userId = \core\Core::get()->session->get('user')['id'];
             $existingFavorite = \Models\UserLikeAnnouncements::findByCondition(['user_id' => $userId, 'announcement_id' => $announcementId]);
             if ($existingFavorite) {
-                \Models\UserLikeAnnouncements::RemoveRow($userId,  $announcementId);
+                \Models\UserLikeAnnouncements::RemoveRow($userId, $announcementId);
                 $successMessage = "Відмітку успішно прибрано!";
             } else {
                 $successMessage = "Оголошення не відмічене!";

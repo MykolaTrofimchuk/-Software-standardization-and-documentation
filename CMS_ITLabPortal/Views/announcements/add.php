@@ -1,5 +1,10 @@
 <?php
 /** @var string $error_message Повідомлення про помилку */
+$userId = \core\Core::get()->session->get('user')['id'];
+if (!\Models\Users::IsAdmin($userId)) {
+    header("Location: /");
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="en">
