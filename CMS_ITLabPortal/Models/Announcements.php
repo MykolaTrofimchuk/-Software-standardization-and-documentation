@@ -37,9 +37,10 @@ class Announcements extends Model
         return $validAnnouncements;
     }
 
-    public static function CountAll()
+    public static function CountAll($where = null, $tableParams = '')
     {
-        return self::findRowsByCondition('COUNT(*) as count');
+        $result = self::findRowsByCondition("COUNT(*) as count", $where, $tableParams);
+        return isset($result[0]['count']) ? (int)$result[0]['count'] : 0;
     }
 
     public static function AddAnnouncement($title, $text, $publicationDate)
@@ -60,4 +61,38 @@ class Announcements extends Model
         return null;
     }
 
+    public static function EditAnnouncementInfo($announcementId, $dataToUpdate)
+    {
+        $announcement = Announcements::selectRowById($announcementId, 'Models\Announcements');
+
+        if ($announcement) {
+            foreach ($dataToUpdate as $field => $value) {
+                if (isset($value) && !empty($value)) {
+                    $announcement->{$field} = $value;
+                }
+            }
+            var_dump($announcement);
+            $announcement->save();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function DeleteRow($where){
+        if (empty($where))
+            $where = null;
+        return Core::get()->db->delete(self::$tableName, $where);
+    }
+
+    public static function SelectByFieldLike($field, $searchTerm, $limit = null, $offset = 0)
+    {
+        $validFields = ['title', 'text', 'publicationDate'];
+        if (!in_array($field, $validFields)) {
+            throw new \InvalidArgumentException("Невірне поле для пошуку: {$field}");
+        }
+
+        $where = ["{$field} LIKE" => "%{$searchTerm}%"];
+        return Core::get()->db->select_like(self::$tableName, "*", $where, $limit, $offset);
+    }
 }

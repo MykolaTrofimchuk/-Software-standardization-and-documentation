@@ -25,14 +25,6 @@ class Model
 
     public function save()
     {
-//        $isInsert = false;
-//        if (!isset($this->{static::$primaryKey}))
-//            $isInsert = true;
-//        else {
-//            $value = $this->{static::$primaryKey};
-//            if (empty($value))
-//                $isInsert = true;
-//        }
         $value = $this->{static::$primaryKey};
         if (empty($value)) // insert
         {
@@ -94,6 +86,20 @@ class Model
             return $arr;
         else
             return null;
+    }
+
+    public static function selectRowById($id, $className)
+    {
+        $arr = Core::get()->db->select(static::$tableName, '*', [static::$primaryKey => $id]);
+        if (count($arr) > 0) {
+            $obj = new $className();
+            foreach ($arr[0] as $key => $value) {
+                $obj->{$key} = $value;
+            }
+            return $obj;
+        } else {
+            return null;
+        }
     }
 
     public static function findByLimitAndOffset($limit, $offset)

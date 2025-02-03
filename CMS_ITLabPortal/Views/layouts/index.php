@@ -29,6 +29,24 @@ $userPhoto = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : '.
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        header{
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px 0;
+        }
+        header h1 {
+            margin: 0;
+            text-align: center;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #f8e2c2, #eacda3);
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 <header class="p-3 mb-3 border-bottom">
@@ -41,15 +59,15 @@ $userPhoto = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : '.
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 link-body-emphasis">Головна</a></li>
-                <li><a href="/announcements/view/1" class="nav-link px-2 link-secondary">Новини</a></li>
+                <li><a href="/" class="nav-link px-2 link-warning">Головна</a></li>
+                <li><a href="/announcements/view/1" class="nav-link px-2 link-light">Новини</a></li>
             </ul>
             <?php if (\Models\Users::IsUserLogged() && \Models\Users::IsAdmin($user['id'])): ?>
-                <a href="/announcements/add" class="btn btn-outline-secondary me-2">&#9658;Створити оголошення</a></li>
+                <a href="/announcements/add" class="btn btn-outline-warning link-light me-2">&#9658;Створити</a></li>
             <?php endif; ?>
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="post" action="">
-                <input type="search" class="form-control" name="titleLike" placeholder="Пошук..." aria-label="Search">
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 " role="search" method="post" action="">
+                <input type="search" class="form-control bg-light" name="titleLike" placeholder="Пошук..." aria-label="Search">
             </form>
             <?php if (!\Models\Users::IsUserLogged()): ?>
                 <div class="col-md-3 text-end">
@@ -59,12 +77,12 @@ $userPhoto = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : '.
             <?php endif; ?>
             <?php if (\Models\Users::IsUserLogged()): ?>
                 <div class="dropdown text-end">
-                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle text-light"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="<?php echo "../" . htmlspecialchars($userPhoto); ?>" alt="User" width="32" height="32"
+                        <img src="<?php echo "../" . htmlspecialchars($userPhoto); ?>" alt="User" width="40" height="40"
                              class="rounded-circle">
                     </a>
-                    <ul class="dropdown-menu text-small" style="">
+                    <ul class="dropdown-menu text-small">
                         <li><a class="dropdown-item" href="/users/me">Профіль</a></li>
                         <li><a class="dropdown-item" href="#">Про нас</a></li>
                         <li><a class="dropdown-item" href="#">Налаштування</a></li>
@@ -93,7 +111,7 @@ $userPhoto = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : '.
                 <use xlink:href="#bootstrap"></use>
             </svg>
         </a>
-        <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Company, Inc</span>
+        <p class="mb-3 mb-md-0 text-body-secondary">&copy; <?= date('Y') ?> ITLabStudio. Усі права захищені.</p>
     </div>
 
     <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">

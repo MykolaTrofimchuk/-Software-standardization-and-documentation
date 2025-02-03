@@ -11,9 +11,10 @@ $announcements = \Models\Announcements::SelectAll();
     <style>
         .card {
             cursor: pointer;
+            background-color: #fff2e1;
         }
         .card:hover {
-            background-color: #f8f9fa;
+            background-color: #ffead2;
         }
         .pagination {
             display: flex;
@@ -22,22 +23,31 @@ $announcements = \Models\Announcements::SelectAll();
         }
 
         .pagination a {
-            color: #007bff;
+            color: white;
             text-decoration: none;
             padding: 8px 16px;
             margin: 0 4px;
-            border: 1px solid #ddd;
+            border: 1px solid #291000;
             border-radius: 4px;
+            background-color: #602500;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .pagination a.active {
-            background-color: #007bff;
+            background-color: #e67e22;
             color: white;
-            border: 1px solid #007bff;
+            border: 1px solid #e67e22;
         }
 
         .pagination a:hover:not(.active) {
-            background-color: #ddd;
+            background-color: #f39c12;
+            transform: scale(1.05);
+        }
+
+        .pagination a:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
         }
     </style>
 </head>
@@ -46,24 +56,18 @@ $announcements = \Models\Announcements::SelectAll();
     <div class="row">
         <!-- Бокова панель -->
         <aside class="col-md-3">
-            <form method="GET" action="/announcements/view" class="mb-3">
-                <label for="start_date" class="form-label">Початкова дата:</label>
-                <input type="date" class="form-control" name="start_date" id="start_date" value="<?= $_GET['start_date'] ?? '' ?>">
-
-                <label for="end_date" class="form-label">Кінцева дата:</label>
-                <input type="date" class="form-control" name="end_date" id="end_date" value="<?= $_GET['end_date'] ?? '' ?>">
-
+            <form method="POST" action="" class="mb-3">
                 <label for="sort" class="form-label">Сортувати за:</label>
                 <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
-                    <option value="date_desc" <?= ($GLOBALS['sort'] === 'date_desc') ? 'selected' : '' ?>>Найновіші</option>
-                    <option value="date_asc" <?= ($GLOBALS['sort'] === 'date_asc') ? 'selected' : '' ?>>Найстаріші</option>
-                    <option value="likes_desc" <?= ($GLOBALS['sort'] === 'likes_desc') ? 'selected' : '' ?>>Найпопулярніші</option>
-                    <option value="likes_asc" <?= ($GLOBALS['sort'] === 'likes_asc') ? 'selected' : '' ?>>Найменш популярні</option>
+                    <option value="">Всі</option>
+                    <option value="yesterday">Вчора</option>
+                    <option value="week">Тиждень</option>
+                    <option value="month">Місяць</option>
+                    <option value="year">Рік</option>
                 </select>
             </form>
 
             <hr>
-
 
             <h5>Архів</h5>
             <select class="form-select">
