@@ -71,7 +71,7 @@ $userPhoto = isset($userInfo[0]['image_path']) ? $userInfo[0]['image_path'] : '.
             </form>
             <?php if (!\Models\Users::IsUserLogged()): ?>
                 <div class="col-md-3 text-end">
-                    <a type="button" class="btn btn-outline-secondary me-2" href="/users/login">Авторизація</a>
+                    <a type="button" class="btn btn-outline-light me-2" href="/users/login">Авторизація</a>
                     <a type="button" class="btn btn-secondary" href="/users/register">Реєстрація</a>
                 </div>
             <?php endif; ?>

@@ -1,5 +1,5 @@
 <?php
-$latestNews = \Models\Announcements::SelectPaginated(5, 1); // Отримуємо останні 5 новин
+$latestNews = \Models\Announcements::SelectPaginated(5, 0);
 ?>
 
 <!DOCTYPE html>
@@ -88,6 +88,28 @@ $latestNews = \Models\Announcements::SelectPaginated(5, 1); // Отримуєм�
             text-decoration: underline;
             background-color: #e67e22;
         }
+
+        .btn-more-news {
+            display: block;
+            width: fit-content;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #d35400;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease-in-out, transform 0.2s;
+        }
+
+        .btn-more-news:hover {
+            background-color: #e67e22;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -113,6 +135,7 @@ $latestNews = \Models\Announcements::SelectPaginated(5, 1); // Отримуєм�
                 <p>Новин поки немає.</p>
             <?php endif; ?>
         </div>
+        <a href="/announcements/view/1" class="btn-more-news">Переглянути більше новин</a>
     </div>
 </main>
 </body>

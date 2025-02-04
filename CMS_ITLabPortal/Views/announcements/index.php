@@ -6,6 +6,7 @@ $pathToImages = $GLOBALS['images'];
 $countOfLikes = $GLOBALS['countLikes'];
 
 $user = \core\Core::get()->session->get('user');
+$isAdmin = (!empty($user) && isset($user['role']) && $user['role'] === 'admin');
 if (!empty($user) && isset($user['id'])) {
     $userInfo = \Models\Users::GetUserInfo($user['id']);
 } else {
@@ -23,65 +24,25 @@ if (!empty($user) && isset($user['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="lightbox.css">
     <style>
-        .big-photo {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .small-photos {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px 0;
-        }
-
-        .small-photos .col-md-3 {
-            flex: 0 0 30%;
-            max-width: 30%;
-        }
-
-        .small-photos img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .small-photos img:hover {
-            transform: scale(1.1);
-        }
-
-        .announcement-header {
-            margin-bottom: 20px;
-        }
-
-        .announcement-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #212529;
-        }
-
-        .announcement-text {
-            font-size: 1.1rem;
-            color: #6c757d;
-        }
-
-        .likes-count {
-            font-weight: 600;
-            color: #e74a3b;
-        }
-
-        .btn-favorite {
+        .btn-admin {
             border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
-        .btn-favorite:hover {
-            background-color: #e74a3b;
+        .btn-edit {
+            background-color: #f39c12;
             color: white;
+        }
+        .btn-edit:hover {
+            background-color: #e67e22;
+        }
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .btn-delete:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
@@ -150,13 +111,14 @@ if (!empty($user) && isset($user['id'])) {
                     <h1 class="announcement-title"><?= htmlspecialchars($announcement->title) ?></h1>
                     <p class="announcement-text"><?= $announcement->text ?></p>
                 <?php endif; ?>
+
                 <?php if (\Models\Users::IsUserLogged()): ?>
                     <?php
                     $isFavorite = \Models\UserLikeAnnouncements::IsFavorite($userInfo[0]['id'], $announcement->id);
                     if (!$isFavorite): ?>
                         <div class="d-flex">
                             <a href="/announcements/addtofavorites/<?= $announcement->id ?>"
-                               class="btn btn-sm btn-outline-secondary btn-favorite">Додати в обрані</a>
+                               class="btn btn-sm btn-outline-secondary btn-favorite">Додати в обрані &#9829;</a>
                         </div>
                     <?php endif; ?>
                     <?php if ($isFavorite): ?>
@@ -166,11 +128,17 @@ if (!empty($user) && isset($user['id'])) {
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
+
+                <?php if ($isAdmin): ?>
+                    <div class="d-flex mt-3">
+                        <a href="/announcements/edit/<?= $announcement->id ?>" class="btn btn-admin btn-edit me-2">Редагувати</a>
+                        <a href="/announcements/delete/<?= $announcement->id ?>" class="btn btn-admin btn-delete">Видалити</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
-
 <script src="lightbox-plus-jquery.js"></script>
 </body>
 </html>

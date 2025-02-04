@@ -52,7 +52,7 @@ $this->Title = 'Реєстрація користувача';
                        id="email" name="email" value="<?= $this->controller->post->email ?>">
                 <label for="email">E-mail</label>
             </div>
-            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Реєстрація</button>
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-warning" type="submit">Реєстрація</button>
             <small class="text-body-secondary">Натискаючи «Зареєструватися», ви погоджуєтеся з умовами
                 використання.</small>
             <hr class="my-4">

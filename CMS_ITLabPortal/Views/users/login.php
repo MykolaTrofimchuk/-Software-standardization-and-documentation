@@ -31,7 +31,7 @@ $this->Title = 'Вхід на сайт';
                        name="password">
                 <label for="password">Пароль</label>
             </div>
-            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Вхід</button>
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-warning" type="submit">Вхід</button>
             <hr class="my-4">
         </form>
     </div>

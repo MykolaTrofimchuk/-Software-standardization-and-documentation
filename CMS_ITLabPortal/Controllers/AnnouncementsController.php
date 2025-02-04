@@ -137,13 +137,13 @@ class AnnouncementsController extends Controller
                                     if (exif_imagetype($tmpName) !== false) {
                                         move_uploaded_file($tmpName, $uploadFile);
                                     } else {
-                                        $this->addErrorMessage('Файл ' . $_FILES['carImages']['name'][$index] . ' не є зображенням.');
+                                        $this->addErrorMessage('Файл ' . $_FILES['files']['name'][$index] . ' не є зображенням.');
                                     }
                                 } else {
-                                    $this->addErrorMessage('Файл ' . $_FILES['carImages']['name'][$index] . ' має неприпустиме розширення.');
+                                    $this->addErrorMessage('Файл ' . $_FILES['files']['name'][$index] . ' має неприпустиме розширення.');
                                 }
                             } else {
-                                $this->addErrorMessage('Не вдалося завантажити файл: ' . $_FILES['carImages']['name'][$index]);
+                                $this->addErrorMessage('Не вдалося завантажити файл: ' . $_FILES['files']['name'][$index]);
                             }
                         }
                         if (is_null(Files::FindPathByAnnouncementId($announcementId)))

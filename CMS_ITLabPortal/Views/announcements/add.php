@@ -56,7 +56,7 @@ if (!\Models\Users::IsAdmin($userId)) {
                           placeholder="Основний опис до статті..."><?= $this->controller->post->text ?></textarea>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Створити новину</button>
+            <button type="submit" class="btn btn-warning">Створити новину</button>
         </form>
     </div>
 </div>
