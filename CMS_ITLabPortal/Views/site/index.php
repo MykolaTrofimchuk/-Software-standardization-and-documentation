@@ -9,7 +9,7 @@ $latestNews = \Models\Announcements::SelectPaginated(5, 0);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $this->Title ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
     <style>
         .container {
             width: 80%;
@@ -114,6 +114,11 @@ $latestNews = \Models\Announcements::SelectPaginated(5, 0);
 </head>
 <body>
 <main>
+    <div id="cookie-popup" style="display: none; position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: #fff; padding: 15px; border-radius: 5px;">
+        <p>Ми використовуємо файли cookie для покращення вашого досвіду. <a href="/site/privacypolicy" style="color: #14a7d0;">Детальніше</a></p>
+        <button id="accept-cookies" style="background: #14a7d0; color: white; border: none; padding: 5px 10px; cursor: pointer;">Прийняти</button>
+        <button id="reject-cookies" style="background: #c0392b; color: white; border: none; padding: 5px 10px; cursor: pointer;">Відхилити</button>
+    </div>
     <div class="container">
         <div class="company-info">
             <h2><b>Ласкаво просимо до ITLabStudio</b></h2>
@@ -140,3 +145,20 @@ $latestNews = \Models\Announcements::SelectPaginated(5, 0);
 </main>
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (!Cookies.get("cookieConsent")) {
+            document.getElementById("cookie-popup").style.display = "block";
+        }
+
+        document.getElementById("accept-cookies").addEventListener("click", function () {
+            Cookies.set("cookieConsent", "true", { expires: 365 });
+            document.getElementById("cookie-popup").style.display = "none";
+        });
+
+        document.getElementById("reject-cookies").addEventListener("click", function () {
+            Cookies.set("cookieConsent", "false", { expires: 365 });
+            document.getElementById("cookie-popup").style.display = "none";
+        });
+    });
+</script>

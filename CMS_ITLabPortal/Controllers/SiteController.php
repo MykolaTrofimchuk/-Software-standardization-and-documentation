@@ -11,4 +11,9 @@ class SiteController extends Controller
     {
         return $this->render();
     }
+
+    public function actionPrivacyPolicy()
+    {
+        return $this->render();
+    }
 }

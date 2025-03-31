@@ -1,0 +1,6 @@
+Name: mycms/cmsproject
+Version: dev-main
+Licenses: MIT
+Dependencies:
+
+Name Version Licenses 

@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="476e006c-1597-466a-a042-f9c2ea25e4cf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +27,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpWebServerValidation" path_to_validation_script="C:\wamp64\www\2 course Coursework\CMS_autoSalesService" selected_validation_type="LOCAL" web_path_to_validation_script="http://cms/" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\wamp64\bin\php\php8.2.13\php.exe" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -95,7 +97,12 @@
       <workItem from="1738414629928" duration="2718000" />
       <workItem from="1738424628922" duration="6772000" />
       <workItem from="1738613089573" duration="9067000" />
-      <workItem from="1738689543891" duration="1710000" />
+      <workItem from="1738689543891" duration="3956000" />
+      <workItem from="1738781904667" duration="3984000" />
+      <workItem from="1738848448952" duration="1443000" />
+      <workItem from="1739039456597" duration="1227000" />
+      <workItem from="1740765680844" duration="1213000" />
+      <workItem from="1740766919121" duration="407000" />
     </task>
     <servers />
   </component>
