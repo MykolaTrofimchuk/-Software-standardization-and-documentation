@@ -1,5 +1,10 @@
 <?php
-/** @var string $error_message Повідомлення про помилку */
+/**
+ * @var string $error_message Повідомлення про помилку
+ *
+ * Перевірка, чи користувач є адміністратором. Якщо ні, здійснюється перенаправлення на головну сторінку.
+ * Виводиться форма для додавання фотографій до статті.
+ */
 $userId = \core\Core::get()->session->get('user')['id'];
 if (!\Models\Users::IsAdmin($userId)) {
     header("Location: /");
@@ -62,8 +67,15 @@ if (!\Models\Users::IsAdmin($userId)) {
 </div>
 
 <script>
+    /**
+     * Додає фотографії до попереднього перегляду.
+     *
+     * Додає функціонал для додавання нових фото, їх попереднього перегляду,
+     * а також можливість видаляти їх по кліку.
+     */
     document.addEventListener('DOMContentLoaded', function() {
         var previewContainer = document.getElementById('preview');
+
         document.getElementById('addPhoto').addEventListener('click', function() {
             var newInput = document.createElement('input');
             newInput.type = 'file';
@@ -76,6 +88,11 @@ if (!\Models\Users::IsAdmin($userId)) {
             newInput.click();
         });
 
+        /**
+         * Обробляє вибір файлів і додає їх до попереднього перегляду.
+         *
+         * @param {Event} event - подія при виборі файлів.
+         */
         function handleFileSelect(event) {
             var files = event.target.files;
             for (var i = 0; i < files.length; i++) {

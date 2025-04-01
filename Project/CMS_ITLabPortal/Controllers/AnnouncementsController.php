@@ -9,25 +9,39 @@ use Models\Files;
 use Models\UserLikeAnnouncements;
 use Models\Users;
 
+/**
+ * Клас для обробки дій, пов'язаних з оголошеннями
+ *
+ * Цей контролер містить методи для додавання, редагування, видалення та перегляду оголошень,
+ * а також для управління зображеннями та уподобаннями користувачів.
+ */
 class AnnouncementsController extends Controller
 {
+    /**
+     * Дія для додавання нового оголошення
+     *
+     * Перевіряє права доступу, обробляє форму для додавання оголошення та завантажує зображення.
+     */
     public function actionAdd()
     {
         if ($this->isPost) {
             $userId = \core\Core::get()->session->get('user')['id'];
 
+            // Перевірка, чи користувач є адміністратором
             if (!Users::IsAdmin($userId)) {
                 $this->redirect('/');
             }
 
+            // Перевірка на заповненість заголовка та тексту
             if (strlen($this->post->title) === 0) {
                 $this->addErrorMessage('Заголовок не вказаний!');
             }
             if (strlen($this->post->text) === 0) {
                 $this->addErrorMessage('Текст не вказано!');
             }
-            $publicationDate = date('Y-m-d H:i:s'); // Assuming publication date is today
+            $publicationDate = date('Y-m-d H:i:s'); // Припускається, що дата публікації - сьогодні
 
+            // Якщо немає помилок, додаємо оголошення та обробляємо зображення
             if (!$this->isErrorMessagesExists()) {
                 Announcements::AddAnnouncement(
                     $this->post->title,
@@ -64,6 +78,7 @@ class AnnouncementsController extends Controller
                 $this->redirect('/announcements/addsuccess');
             }
         } else {
+            // Перевірка, чи користувач увійшов в систему
             if (!Users::IsUserLogged()) {
                 $this->redirect('/');
             }
@@ -73,6 +88,11 @@ class AnnouncementsController extends Controller
         return $this->render();
     }
 
+    /**
+     * Дія для редагування оголошення
+     *
+     * Перевіряє права доступу, обробляє форму редагування оголошення, зображень та видалення зображень.
+     */
     public function actionEdit()
     {
         if (!Users::IsUserLogged()) {
@@ -101,14 +121,15 @@ class AnnouncementsController extends Controller
                 }
 
                 if (!$this->isErrorMessagesExists()) {
-
                     $announcementDataToUpdate = [
                         'title' => $this->post->title,
                         'text' => $this->post->text
                     ];
 
+                    // Оновлення інформації про оголошення
                     $resUpdateAnn = Announcements::EditAnnouncementInfo($announcementId, $announcementDataToUpdate);
 
+                    // Обробка завантаження нових зображень
                     if (!empty($_FILES['files'])) {
                         $uploadDir = "src/database/announcements/announcement" . $announcementId . "/";
                         if (!file_exists($uploadDir)) {
@@ -124,7 +145,6 @@ class AnnouncementsController extends Controller
                                 $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
 
                                 if (in_array($extension, $allowedExtensions)) {
-                                    // Перевірка наявності файлу з таким ім'ям
                                     $i = 0;
                                     $newFileName = ($index + count($existingImages)) . '.' . $extension;
                                     while (in_array($newFileName, $existingImages)) {
@@ -150,6 +170,7 @@ class AnnouncementsController extends Controller
                             Files::AddImages($announcementId, $uploadDir);
                     }
 
+                    // Видалення зображень
                     if (strlen($this->post->deletedImages) !== 0) {
                         $deletedImagesArray = is_array($this->post->deletedImages) ? $this->post->deletedImages : explode(', ', $this->post->deletedImages);
 
@@ -174,6 +195,11 @@ class AnnouncementsController extends Controller
         }
     }
 
+    /**
+     * Дія для видалення оголошення
+     *
+     * Перевіряє права доступу та видаляє оголошення та його зображення.
+     */
     public function actionDelete()
     {
         if (!Users::IsUserLogged()) {
@@ -211,9 +237,13 @@ class AnnouncementsController extends Controller
         }
     }
 
+    /**
+     * Дія для перегляду конкретного оголошення
+     *
+     * Виводить оголошення за його ID разом з його зображеннями та кількістю вподобань.
+     */
     public function actionIndex()
     {
-        // Отримати значення параметра id зі шляху
         $routeParams = $this->get->route;
         $queryParts = explode('/', $routeParams);
         $id = end($queryParts);
@@ -235,6 +265,9 @@ class AnnouncementsController extends Controller
         }
     }
 
+    /**
+     * Дія для перегляду списку оголошень з пагінацією та сортуванням
+     */
     public function actionView()
     {
         $routeParams = $this->get->route;
@@ -308,6 +341,9 @@ class AnnouncementsController extends Controller
         return $this->render();
     }
 
+    /**
+     * Дія для відображення успішного додавання оголошення
+     */
     public function actionAddsuccess()
     {
         if (!Users::IsUserLogged()) {
@@ -316,6 +352,9 @@ class AnnouncementsController extends Controller
         return $this->render();
     }
 
+    /**
+     * Дія для вподобання оголошення
+     */
     public function actionAddtofavorites()
     {
         if (!\Models\Users::IsUserLogged()) {
@@ -340,6 +379,9 @@ class AnnouncementsController extends Controller
         }
     }
 
+    /**
+     * Дія для видалення оголошення із вподобаних
+     */
     public function actionRemovefromfavorites()
     {
         if (!\Models\Users::IsUserLogged()) {

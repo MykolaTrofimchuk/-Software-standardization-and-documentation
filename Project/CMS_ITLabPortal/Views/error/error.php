@@ -1,5 +1,9 @@
 <?php
-/** @var string $errorCode */
+/**
+ * Сторінка помилки
+ *
+ * @var string $errorCode
+ */
 ?>
 
 <!DOCTYPE html>

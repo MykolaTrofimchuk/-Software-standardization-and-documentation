@@ -1,4 +1,8 @@
 <?php
+/**
+ * Видення всіх наявних оголошень у системі
+ *
+ */
 $this->Title = '';
 
 $announcement = $GLOBALS['announcement'];

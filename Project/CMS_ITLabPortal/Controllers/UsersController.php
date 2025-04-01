@@ -7,13 +7,34 @@ use core\Core;
 use http\Client\Curl\User;
 use Models\Users;
 
+/**
+ * Контролер для обробки користувацьких операцій.
+ *
+ * Цей контролер обробляє реєстрацію, вхід, редагування профілю користувачів та інші дії,
+ * пов'язані з керуванням обліковими записами користувачів.
+ */
 class UsersController extends Controller
 {
+    /**
+     * Відображає сторінку профілю користувача.
+     *
+     * Повертає HTML-контент профілю користувача.
+     *
+     * @return array Масив з HTML-контентом сторінки профілю користувача.
+     */
     public function actionIndex()
     {
         return $this->render('Views/users/me.php');
     }
 
+    /**
+     * Реєстрація нового користувача.
+     *
+     * Перевіряє введені дані користувача та реєструє нового користувача, якщо дані коректні.
+     * Якщо є помилки, вони додаються в повідомлення.
+     *
+     * @return array Масив з HTML-контентом сторінки реєстрації.
+     */
     public function actionRegister()
     {
         if ($this->isPost) {
@@ -42,11 +63,26 @@ class UsersController extends Controller
         return $this->render();
     }
 
+    /**
+     * Відображає сторінку успішної реєстрації.
+     *
+     * Повертає HTML-контент сторінки з підтвердженням успішної реєстрації.
+     *
+     * @return array Масив з HTML-контентом сторінки успішної реєстрації.
+     */
     public function actionRegistersuccess()
     {
         return $this->render();
     }
 
+    /**
+     * Вхід користувача.
+     *
+     * Перевіряє правильність введених логіна та пароля. Якщо дані правильні, користувач входить в систему.
+     * Якщо дані неправильні, виводиться повідомлення про помилку.
+     *
+     * @return array Масив з HTML-контентом сторінки входу.
+     */
     public function actionLogin()
     {
         if (Users::IsUserLogged())
@@ -63,12 +99,26 @@ class UsersController extends Controller
         return $this->render();
     }
 
+    /**
+     * Вихід користувача.
+     *
+     * Користувач виходить з системи, після чого його перенаправляють на сторінку входу.
+     *
+     * @return void
+     */
     public function actionLogout()
     {
         Users::LogoutUser();
         $this->redirect('/users/login');
     }
 
+    /**
+     * Відображає сторінку профілю користувача.
+     *
+     * Перевіряє, чи користувач увійшов в систему. Якщо не увійшов — перенаправляє на головну сторінку.
+     *
+     * @return array Масив з HTML-контентом сторінки профілю.
+     */
     public function actionMe()
     {
         if (!Users::IsUserLogged())
@@ -76,6 +126,14 @@ class UsersController extends Controller
         return $this->render();
     }
 
+    /**
+     * Редагування даних користувача.
+     *
+     * Дозволяє користувачу змінювати логін, ім'я, прізвище та електронну пошту.
+     * Перевіряє наявність помилок і виводить повідомлення при необхідності.
+     *
+     * @return array Масив з HTML-контентом сторінки редагування даних.
+     */
     public function actionEdit()
     {
         if (!Users::IsUserLogged()) {
@@ -122,6 +180,14 @@ class UsersController extends Controller
         return $this->render();
     }
 
+    /**
+     * Зміна паролю користувача.
+     *
+     * Перевіряє введений поточний пароль і нові паролі, а також їх відповідність.
+     * Якщо умови виконуються, оновлює пароль користувача.
+     *
+     * @return array Масив з HTML-контентом сторінки редагування паролю.
+     */
     public function actionEditpassword()
     {
         if (!Users::IsUserLogged()) {
@@ -164,6 +230,14 @@ class UsersController extends Controller
         return $this->render();
     }
 
+    /**
+     * Зміна фото користувача.
+     *
+     * Дозволяє користувачу завантажити нове фото профілю.
+     * Перевіряє наявність помилок при завантаженні файлу та оновлює дані в базі.
+     *
+     * @return array Масив з HTML-контентом сторінки редагування фото.
+     */
     public function actionEditphoto()
     {
         if (!Users::IsUserLogged()) {
@@ -206,5 +280,4 @@ class UsersController extends Controller
 
         return $this->render();
     }
-
 }

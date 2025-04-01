@@ -1,4 +1,9 @@
 <?php
+/**
+ * Сторінка окремого обраного оголошення
+ *
+ * @var TYPE_NAME $announcements оголошення
+ */
 $announcements = \Models\Announcements::SelectAll();
 ?>
 <!doctype html>

@@ -7,6 +7,8 @@ use core\Model;
 use DateTime;
 
 /**
+ * Клас для роботи з таблицею в БД, пов'язаною з Оголошеннями (Announcements)
+ *
  * @property int $id ID оголошення
  * @property string $title Заголовок оголошення
  * @property string $text Текст оголошення

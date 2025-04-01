@@ -1,5 +1,9 @@
 <?php
-/** @var string $Title */
+/**
+ * Загальний макет сторінок, що містить header, основний блок та footer
+ *
+ * @var string $Title
+ */
 /** @var string $Content */
 
 if (empty($Title))

@@ -6,6 +6,8 @@ use core\Core;
 use core\Model;
 
 /**
+ * Клас, який працює з таблицею "users", що містить інформацію про користувачів системи.
+ *
  * @property int $id ID
  * @property string $login Логін
  * @property string $password Пароль

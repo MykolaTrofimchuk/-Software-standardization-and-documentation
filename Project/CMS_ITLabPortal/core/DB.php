@@ -1,11 +1,28 @@
 <?php
 
 namespace core;
-
+/**
+ * Клас для роботи з базою даних через PDO.
+ *
+ * Цей клас забезпечує основні методи для виконання SQL запитів: вибірки, вставки, оновлення та видалення.
+ */
 class DB
 {
+    /**
+     * Об'єкт PDO для підключення до бази даних.
+     *
+     * @var \PDO
+     */
     public $pdo;
 
+    /**
+     * Конструктор для ініціалізації з'єднання з базою даних.
+     *
+     * @param string $host Хост бази даних.
+     * @param string $name Назва бази даних.
+     * @param string $login Логін для підключення.
+     * @param string $password Пароль для підключення.
+     */
     public function __construct($host, $name, $login, $password)
     {
         $this->pdo = new \PDO("mysql:host={$host};dbname={$name}", $login, $password,
@@ -16,6 +33,12 @@ class DB
         );
     }
 
+    /**
+     * Створює SQL умовний вираз для WHERE.
+     *
+     * @param mixed $where Умова для фільтрації.
+     * @return string
+     */
     protected function where($where)
     {
         if (is_array($where)) {
@@ -41,6 +64,16 @@ class DB
         return $where_string;
     }
 
+    /**
+     * Виконує SQL запит SELECT для отримання даних з таблиці.
+     *
+     * @param string $table Назва таблиці.
+     * @param mixed $fields Поля для вибірки.
+     * @param mixed $where Умова фільтрації.
+     * @param int|null $limit Ліміт на кількість записів.
+     * @param int $offset Зсув.
+     * @return array
+     */
     public function select($table, $fields = "*", $where = null, $limit = null, $offset = 0)
     {
         if (is_array($fields)) {
@@ -78,6 +111,13 @@ class DB
         return $sth->fetchAll();
     }
 
+    /**
+     * Виконує SQL запит INSERT для вставки даних у таблицю.
+     *
+     * @param string $table Назва таблиці.
+     * @param array $row_to_insert Дані для вставки.
+     * @return int Кількість змінених рядків.
+     */
     public function insert($table, $row_to_insert)
     {
         $fields_list = implode(", ", array_keys($row_to_insert));
@@ -95,6 +135,13 @@ class DB
         return $sth->rowCount();
     }
 
+    /**
+     * Виконує SQL запит DELETE для видалення даних з таблиці.
+     *
+     * @param string $table Назва таблиці.
+     * @param mixed $where Умова фільтрації.
+     * @return int Кількість видалених рядків.
+     */
     public function delete($table, $where)
     {
         $where_string = $this->where($where);
@@ -111,6 +158,14 @@ class DB
         return $sth->rowCount();
     }
 
+    /**
+     * Виконує SQL запит UPDATE для оновлення даних у таблиці.
+     *
+     * @param string $table Назва таблиці.
+     * @param array $row_to_update Дані для оновлення.
+     * @param mixed $where Умова фільтрації.
+     * @return int Кількість змінених рядків.
+     */
     public function update($table, $row_to_update, $where)
     {
         $where_string = $this->where($where);
@@ -134,6 +189,16 @@ class DB
         return $sth->rowCount();
     }
 
+    /**
+     * Виконує SQL запит SELECT з використанням оператора LIKE.
+     *
+     * @param string $table Назва таблиці.
+     * @param mixed $fields Поля для вибірки.
+     * @param mixed $where Умова фільтрації.
+     * @param int|null $limit Ліміт на кількість записів.
+     * @param int $offset Зсув.
+     * @return array
+     */
     public function select_like($table, $fields = "*", $where = null, $limit = null, $offset = 0)
     {
         if (is_array($fields)) {
@@ -174,6 +239,12 @@ class DB
         return $sth->fetchAll();
     }
 
+    /**
+     * Створює SQL умовний вираз для WHERE з оператором LIKE.
+     *
+     * @param mixed $where Умова для фільтрації.
+     * @return string
+     */
     protected function where_like($where)
     {
         if (is_array($where)) {

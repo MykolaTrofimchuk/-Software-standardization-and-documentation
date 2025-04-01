@@ -1,11 +1,17 @@
 <?php
-/** @var string $error_message Повідомлення про помилку */
-
+/**
+ * Сторінка для зміни паролю користувача
+ *
+ * Цей файл відповідає за отримання інформації про користувача та відображення форми для зміни його паролю.
+ * @var string $error_message Повідомлення про помилку, яке може бути виведене на сторінці
+ * @var string $this->Title Заголовок сторінки
+ * @var array $userInfo Інформація про користувача, отримана з бази даних
+ */
 $this->Title = 'Змінити пароль користувача';
 
 $userInfo = \Models\Users::GetUserInfo(\core\Core::get()->session->get('user')['id']);
 ?>
-    <!doctype html>
+<!doctype html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
