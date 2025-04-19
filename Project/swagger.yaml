@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: Users API
+  version: 1.0.0
+  description: Опис авторизації та реєстрації користувачів
+
+paths:
+  /users/register:
+    post:
+      summary: Реєстрація нового користувача
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - login
+                - password
+                - password2
+                - firstName
+                - lastName
+              properties:
+                login:
+                  type: string
+                password:
+                  type: string
+                password2:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                  format: email
+      responses:
+        '302':
+          description: Редірект після успішної реєстрації
+        '400':
+          description: Помилка валідації
+
+  /users/login:
+    post:
+      summary: Вхід користувача
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - login
+                - password
+              properties:
+                login:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '302':
+          description: Редірект після успішного входу
+        '401':
+          description: Невірні дані для входу
